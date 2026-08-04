@@ -431,4 +431,47 @@
     });
   });
 
+  // ─── Source Code & Media Protection ─────────
+  // 1. Disable Context Menu (Right Click)
+  document.addEventListener('contextmenu', (e) => {
+    e.preventDefault();
+    showToast('Source inspection and right-click are protected for this website.', 'info');
+    return false;
+  });
+
+  // 2. Disable Developer Tools & View Source Shortcuts
+  document.addEventListener('keydown', (e) => {
+    // Disable F12 key
+    if (e.key === 'F12' || e.keyCode === 123) {
+      e.preventDefault();
+      showToast('Developer tools access is protected.', 'info');
+      return false;
+    }
+
+    const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
+    const metaKey = isMac ? e.metaKey : e.ctrlKey;
+
+    // Disable Ctrl+Shift+I / J / C (Inspect / Console)
+    if (metaKey && e.shiftKey && (e.key === 'I' || e.key === 'i' || e.key === 'J' || e.key === 'j' || e.key === 'C' || e.key === 'c')) {
+      e.preventDefault();
+      showToast('Developer tools access is protected.', 'info');
+      return false;
+    }
+
+    // Disable Ctrl+U (View Source), Ctrl+S (Save), Ctrl+P (Print)
+    if (metaKey && (e.key === 'U' || e.key === 'u' || e.key === 'S' || e.key === 's' || e.key === 'P' || e.key === 'p')) {
+      e.preventDefault();
+      showToast('Source view and page saving are protected.', 'info');
+      return false;
+    }
+  });
+
+  // 3. Disable Image Dragging
+  document.addEventListener('dragstart', (e) => {
+    if (e.target && e.target.tagName === 'IMG') {
+      e.preventDefault();
+      return false;
+    }
+  });
+
 })();
