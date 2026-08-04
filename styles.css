@@ -152,10 +152,10 @@ input, textarea, select { font-family: inherit; outline: none; -webkit-user-sele
 .nav-brand span {
   font-family: var(--font-heading);
   font-size: 0.95rem;
-  font-weight: 700;
+  font-weight: 800;
   color: var(--text-primary);
   line-height: 1.25;
-  letter-spacing: 0.01em;
+  letter-spacing: 0.02em;
   transition: color var(--transition-fast);
 }
 .nav-brand:hover span {
