@@ -146,9 +146,11 @@ input, textarea, select { font-family: inherit; outline: none; }
 }
 .nav-brand span {
   font-family: var(--font-heading);
-  font-size: 1.25rem;
+  font-size: 0.95rem;
   font-weight: 700;
   color: var(--text-primary);
+  line-height: 1.25;
+  letter-spacing: 0.01em;
 }
 .nav-links {
   display: flex;
@@ -1338,6 +1340,11 @@ input, textarea, select { font-family: inherit; outline: none; }
   .gallery-grid { grid-template-columns: repeat(3, 1fr); }
 }
 @media (max-width: 768px) {
+  .nav-brand span {
+    font-size: 0.8rem;
+    line-height: 1.2;
+    max-width: 260px;
+  }
   .nav-links {
     display: none;
     position: fixed;
