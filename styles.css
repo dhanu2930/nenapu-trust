@@ -1878,9 +1878,86 @@ body.loaded .scroll-watermark {
     grid-template-columns: 1fr;
     gap: 40px;
   }
-  .president-image-wrapper {
-    order: 2;
-  }
+
+/* ============================================
+   SECURITY NOTICE MODAL POPUP
+   ============================================ */
+.security-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(16, 12, 9, 0.78);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+.security-modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+.security-modal-card {
+  background: #FFFFFF;
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  padding: 36px 30px;
+  max-width: 450px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.28);
+  transform: scale(0.92) translateY(10px);
+  transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+.security-modal-overlay.active .security-modal-card {
+  transform: scale(1) translateY(0);
+}
+.security-modal-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: rgba(200, 82, 50, 0.12);
+  color: #C85232;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  border: 1px solid rgba(200, 82, 50, 0.25);
+  box-shadow: 0 4px 14px rgba(200, 82, 50, 0.15);
+}
+.security-modal-card h3 {
+  font-family: var(--font-heading);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+}
+.security-modal-card p {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+.btn-security-close {
+  width: 100%;
+  padding: 12px 24px;
+  background: linear-gradient(135deg, #1B5E4F 0%, #C85232 100%);
+  color: #FFFFFF;
+  font-weight: 700;
+  font-size: 0.95rem;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 14px rgba(27, 94, 79, 0.3);
+}
+.btn-security-close:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(200, 82, 50, 0.35);
 }
 
 

@@ -443,20 +443,58 @@
     });
   });
 
-  // ─── Source Code & Media Protection ─────────
-  // 1. Disable Context Menu (Right Click)
+  // ─── Security Protection Modal Popup ───────────
+  function showSecurityModal(type) {
+    let existingModal = document.getElementById('securityNoticeModal');
+    
+    if (!existingModal) {
+      existingModal = document.createElement('div');
+      existingModal.id = 'securityNoticeModal';
+      existingModal.className = 'security-modal-overlay';
+      existingModal.innerHTML = `
+        <div class="security-modal-card">
+          <div class="security-modal-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+          </div>
+          <h3>Content Protection Notice</h3>
+          <p>
+            Right-clicking and source code inspection are restricted to preserve the original artistic works, media assets, and intellectual property of <strong>Nenapu Cultural &amp; Educational Charitable Trust</strong>.
+          </p>
+          <button type="button" class="btn-security-close" id="securityModalClose">I Understand</button>
+        </div>
+      `;
+      document.body.appendChild(existingModal);
+
+      const closeBtn = existingModal.querySelector('#securityModalClose');
+      closeBtn.addEventListener('click', () => {
+        existingModal.classList.remove('active');
+      });
+
+      existingModal.addEventListener('click', (e) => {
+        if (e.target === existingModal) {
+          existingModal.classList.remove('active');
+        }
+      });
+    }
+
+    setTimeout(() => {
+      existingModal.classList.add('active');
+    }, 10);
+  }
+
+  // 1. Disable Right-Click with Security Modal Popup
   document.addEventListener('contextmenu', (e) => {
     e.preventDefault();
-    showToast('Source inspection and right-click are protected for this website.', 'info');
+    showSecurityModal('right-click');
     return false;
   });
 
-  // 2. Disable Developer Tools & View Source Shortcuts
+  // 2. Disable Developer Tools & View Source Shortcuts with Security Modal Popup
   document.addEventListener('keydown', (e) => {
     // Disable F12 key
     if (e.key === 'F12' || e.keyCode === 123) {
       e.preventDefault();
-      showToast('Developer tools access is protected.', 'info');
+      showSecurityModal('inspection');
       return false;
     }
 
@@ -466,7 +504,7 @@
     // Disable Ctrl+Shift+I / J / C (Inspect / Console)
     if (metaKey && e.shiftKey && (e.key === 'I' || e.key === 'i' || e.key === 'J' || e.key === 'j' || e.key === 'C' || e.key === 'c')) {
       e.preventDefault();
-      showToast('Developer tools access is protected.', 'info');
+      showSecurityModal('inspection');
       return false;
     }
 
