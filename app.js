@@ -100,6 +100,18 @@
         navLinksContainer.classList.remove('open');
       });
     });
+
+    // Close mobile menu on click outside
+    document.addEventListener('click', (e) => {
+      if (
+        navLinksContainer.classList.contains('open') &&
+        !navLinksContainer.contains(e.target) &&
+        !hamburger.contains(e.target)
+      ) {
+        hamburger.classList.remove('open');
+        navLinksContainer.classList.remove('open');
+      }
+    });
   }
 
   // ─── Scroll Reveal (Intersection Observer) ────
