@@ -59,15 +59,15 @@
 
   function highlightActiveLink() {
     const path = window.location.pathname;
-    const page = path.split('/').pop();
+    const page = path.split('/').pop() || 'index.html';
 
     navLinks.forEach((link) => {
       const href = link.getAttribute('href');
-      // Home page is represented by index.html, /, or empty string
       const isHome = href === 'index.html' || href === '/' || href === '';
       const isCurrentHome = page === '' || page === 'index.html' || page === '/';
+      const isPlayPage = href === 'play.html' && page.startsWith('play');
 
-      if (href && (href === page || (isHome && isCurrentHome))) {
+      if (href && (href === page || (isHome && isCurrentHome) || isPlayPage)) {
         link.classList.add('active');
       } else {
         link.classList.remove('active');
