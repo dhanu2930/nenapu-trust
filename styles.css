@@ -251,23 +251,63 @@ input, textarea, select { font-family: inherit; outline: none; -webkit-user-sele
   color: var(--primary);
 }
 
-/* Mobile hamburger */
+/* Mobile menu tab / hamburger */
 .hamburger {
   display: none;
-  flex-direction: column;
-  gap: 5px;
-  background: none;
-  padding: 8px;
+  align-items: center;
+  gap: 8px;
+  background: rgba(27, 94, 79, 0.08);
+  border: 1px solid rgba(27, 94, 79, 0.22);
+  padding: 7px 14px;
+  border-radius: 24px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.04);
 }
-.hamburger span {
-  width: 22px; height: 2px;
-  background: var(--text-primary);
+.hamburger:hover, .hamburger:focus-visible {
+  background: rgba(27, 94, 79, 0.15);
+  border-color: var(--primary);
+  transform: translateY(-1px);
+}
+.hamburger.open {
+  background: rgba(200, 82, 50, 0.12);
+  border-color: var(--secondary);
+}
+.hamburger::before {
+  content: 'MENU';
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--primary);
+  transition: color var(--transition-fast);
+}
+.hamburger.open::before {
+  content: 'CLOSE';
+  color: var(--secondary);
+}
+.hamburger-bars {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 4px;
+  justify-content: center;
+  align-items: center;
+}
+.hamburger span, .hamburger-bars span {
+  width: 18px;
+  height: 2px;
+  background: var(--primary);
   border-radius: 2px;
   transition: all var(--transition-fast);
+  display: block;
 }
-.hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
-.hamburger.open span:nth-child(2) { opacity: 0; }
-.hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+.hamburger.open span, .hamburger.open .hamburger-bars span {
+  background: var(--secondary);
+}
+.hamburger.open span:nth-child(1), .hamburger.open .hamburger-bars span:nth-child(1) { transform: rotate(45deg) translate(4px, 4px); }
+.hamburger.open span:nth-child(2), .hamburger.open .hamburger-bars span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.hamburger.open span:nth-child(3), .hamburger.open .hamburger-bars span:nth-child(3) { transform: rotate(-45deg) translate(4px, -4px); }
 
 /* ============================================
    HERO
@@ -1438,7 +1478,7 @@ input, textarea, select { font-family: inherit; outline: none; -webkit-user-sele
     font-size: 0.95rem;
   }
   .nav-links.open { display: flex; }
-  .hamburger { display: flex; }
+  .hamburger { display: inline-flex; }
 }
 @media (max-width: 768px) {
   .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
